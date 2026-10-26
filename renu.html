@@ -1,0 +1,71 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login Dashboard</title>
+</head>
+<body>
+
+    <div id="login">
+        <h2>User Login</h2>
+
+        <input type="text" id="username" placeholder="Username">
+        <br><br>
+
+        <input type="password" id="password" placeholder="Password">
+        <br><br>
+
+        <button onclick="signupUser()">Sign Up</button>
+        <button onclick="loginUser()">Login</button>
+
+        <p id="message"></p>
+    </div>
+
+    <div id="dashboard" style="display:none">
+        <h2>Welcome to Dashboard</h2>
+        <p id="welcome"></p>
+        <p>View your profile and account details.</p>
+
+        <button onclick="logoutUser()">Logout</button>
+    </div>
+
+    <script>
+        function signupUser() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+
+            localStorage.setItem("username", user);
+            localStorage.setItem("password", pass);
+
+            document.getElementById("message").innerHTML =
+                "Signup Successful";
+        }
+
+        function loginUser() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+
+            if (user === localStorage.getItem("username") &&
+                pass === localStorage.getItem("password") &&
+                user !== "") {
+
+                document.getElementById("login").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+
+                document.getElementById("welcome").innerHTML =
+                    "Welcome, " + user;
+            } else {
+                document.getElementById("message").innerHTML =
+                    "Invalid Username or Password";
+            }
+        }
+
+        function logoutUser() {
+            document.getElementById("dashboard").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
+```
